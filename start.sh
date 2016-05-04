@@ -14,7 +14,25 @@ if ( id ${USER} ); then
 else
     echo "INFO: User ${USER} does not exists, we create it"
     ENC_PASS=$(perl -e 'print crypt($ARGV[0], "password")' ${PASS})
-    useradd -d /data -m -p ${ENC_PASS} -u ${USER_UID} -s /bin/sh ${USER}
+
+    useradd -m -p ${ENC_PASS} -u ${USER_UID} ${USER}
+    usermod ${USER} -s /bin/sh
+
+    mkdir /data/${USER}
+    useradd -d /data/${USER} -M -N -g users ${USER}
+    usermod ${USER} -g sftponly
+
+    mkdir /data/home
+    chmod 777 /data/home
+    mkdir /data/home/Inbox
+    chmod 777 /data/home/Inbox
+
+    usermod ${USER} -s /bin/sh
+    usermod ${USER} -g sftponly
+
+    ln -s /data/home /data
+    ln -s /data/home/Inbox /data
+
 fi
 
 exec /usr/sbin/sshd -D

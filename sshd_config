@@ -26,7 +26,7 @@ PermitRootLogin no
 StrictModes yes
 
 RSAAuthentication no
-PubkeyAuthentication yes
+PubkeyAuthentication no
 #AuthorizedKeysFile	%h/.ssh/authorized_keys
 
 # Don't read the user's ~/.rhosts and ~/.shosts files
@@ -73,3 +73,8 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
+
+Match Group sftponly
+    ChrootDirectory /data
+    ForceCommand internal-sftp
+    AllowTcpForwarding no

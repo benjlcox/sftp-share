@@ -18,14 +18,14 @@ else
     useradd -m -p ${ENC_PASS} -u ${USER_UID} ${USER}
     usermod ${USER} -s /bin/sh
 
-    usermod ${USER} -g sftponly
+    # usermod ${USER} -g sftponly
 
     mkdir /data/home
     chmod 777 /data/home
     mkdir /data/home/Inbox
     chmod 777 /data/home/Inbox
 
-    useradd -d /data/home ${USER}
+    usermod -d /data/home ${USER}
     usermod ${USER} -s /bin/sh
 
     ln -s /data/home/Inbox /data

@@ -18,8 +18,7 @@ else
     useradd -m -p ${ENC_PASS} -u ${USER_UID} ${USER}
     usermod ${USER} -s /bin/sh
 
-    mkdir /data/${USER}
-    useradd -d /data/${USER} -M -N -g users ${USER}
+    useradd -d /
     usermod ${USER} -g sftponly
 
     mkdir /data/home

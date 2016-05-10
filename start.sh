@@ -18,7 +18,7 @@ else
     useradd -m -p ${ENC_PASS} -u ${USER_UID} ${USER}
     usermod ${USER} -s /bin/sh
 
-    useradd -d /
+    useradd -d /data
     usermod ${USER} -g sftponly
 
     mkdir /data/home
@@ -29,7 +29,7 @@ else
     usermod ${USER} -s /bin/sh
     usermod ${USER} -g sftponly
 
-    ln -s /data/home /data
+    ln -s . /data
     ln -s /data/home/Inbox /data
 
 fi
